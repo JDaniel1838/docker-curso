@@ -1,0 +1,22 @@
+version: "3.9" 
+services:
+
+  aplicacion_node: 
+    build: 
+      context: . #Indica donde se encuentra la aplicación donde va a estar trabajando 
+      dockerfile: Dockerfile.dev #Indicamos que use el archivo de desarrollo
+    ports:
+      - "3000:3000" #Mapear puertos: Puerto de PC:Puerto de contenedor
+    links: 
+      - monguito 
+    volumes:
+      - .:/home/app #decimos que la ruta actual es la que tiene que ser montada en el volumen y despues de los dos puntos indicamos la ruta del contenedor 
+
+  monguito: 
+    image: mongo 
+    ports:
+      - "27017:27017" 
+    environment: 
+    - MONGO_INITDB_ROOT_USERNAME=daniel
+    - MONGO_INITDB_ROOT_PASSWORD=1234 
+     

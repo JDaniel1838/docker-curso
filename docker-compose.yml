@@ -1,0 +1,18 @@
+version: "3.9" #version de Docker Compose
+services: #Son los contenedores que va a crear
+
+  aplicacion_node: # Nombre del contenedor sin comillas
+    build: . # En esta misma ruta busca el archivo "Dockerfile " y construye su imagen y utilízala para este contenedor 
+    ports:
+      - "3000:3000" #Mapear puertos: Puerto de PC:Puerto de contenedor
+    links: #Los nombres de los contenedores sin comillas a mapear que utiliza este contenedor (Con que contenedores se puede conectar)
+      - monguito 
+
+  monguito: #Segundo contenedor, su nombre sin comillas
+    image: mongo #Descargara la imagen de mongo desde Hub Docker
+    ports:
+      - "27017:27017" # Mapear puertos: Puerto de PC:Puerto de contenedor
+    environment: #Variables de entorno requeridas por mongo
+    - MONGO_INITDB_ROOT_USERNAME=daniel
+    - MONGO_INITDB_ROOT_PASSWORD=1234 
+     
